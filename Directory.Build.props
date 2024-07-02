@@ -1,5 +1,9 @@
 <Project>
   <PropertyGroup>
     <Errorlog Condition="$(EMIT_SARIF) == true">$(MSBuildThisFileDirectory)/sarif/$(MSBuildProjectName).sarif,version=2.1</Errorlog>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>Recommended</AnalysisMode>
+    <AnalysisModeSecurity>All</AnalysisModeSecurity>
+    <AnalysisLevel>preview</AnalysisLevel>
   </PropertyGroup>
 </Project>
