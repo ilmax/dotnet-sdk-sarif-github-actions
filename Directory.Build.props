@@ -1,0 +1,5 @@
+<Project>
+  <PropertyGroup>
+    <Errorlog Condition="$(EMIT_SARIF) == true">$(MSBuildThisFileDirectory)/sarif/$(MSBuildProjectName).sarif,version=2.1</Errorlog>
+  </PropertyGroup>
+</Project>

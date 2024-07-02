@@ -1,0 +1,63 @@
+name: Build API
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  EMIT_SARIF: true
+
+concurrency:
+  group: ${{ github.event.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build_back_end:
+    name: 'Build back-end'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      security-events: write
+    steps:
+      - name: Install workload
+        run: dotnet workload install aspire
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup nuget cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore dotnet-sdk-sarif-github-actions.sln
+        shell: bash
+
+      - name: Create sarif directory
+        run: mkdir sarif
+
+      - name: Build Solution
+        run: dotnet build dotnet-sdk-sarif-github-actions.sln --no-restore --tl
+        
+      - name: Collect all sarif files
+        run: find . -name *.sarif
+
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          # Path to SARIF directory relative to the root of the repository
+          sarif_file: sarif
