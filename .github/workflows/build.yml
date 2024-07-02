@@ -17,12 +17,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build_back_end:
-    name: 'Build back-end'
+  build:
+    name: 'Build projects'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
-      contents: read
       security-events: write
     steps:
       - name: Checkout Repository
