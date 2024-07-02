@@ -1,4 +1,4 @@
-name: Build API
+name: Build
 
 on:
   push:
@@ -24,9 +24,6 @@ jobs:
     permissions:
       security-events: write
     steps:
-      - name: Install workload
-        run: dotnet workload install aspire
-
       - name: Checkout Repository
         uses: actions/checkout@v4
 
@@ -37,6 +34,9 @@ jobs:
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
           restore-keys: |
             ${{ runner.os }}-nuget-
+
+      - name: Install workload
+        run: dotnet workload install aspire
 
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
