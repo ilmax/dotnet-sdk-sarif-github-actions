@@ -1,4 +1,6 @@
+#pragma warning disable CA1707
 namespace dotnet_sdk_sarif_github_actions.Web;
+#pragma warning restore CA1707
 
 public class WeatherApiClient(HttpClient httpClient)
 {
@@ -23,7 +25,7 @@ public class WeatherApiClient(HttpClient httpClient)
     }
 }
 
-public record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+public sealed record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
