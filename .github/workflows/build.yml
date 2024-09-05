@@ -62,7 +62,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: sarif-files
-          path: sarif/
+          path: result.sarif
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
