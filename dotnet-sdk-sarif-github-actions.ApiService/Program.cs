@@ -22,10 +22,10 @@ app.MapGet("/weatherforecast", () =>
         new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-#pragma warning disable CA5394            
+#pragma warning disable CA5394
             Random.Shared.Next(-20, 55),
             summaries[Random.Shared.Next(summaries.Length)]
-#pragma warning restore CA5394             
+#pragma warning restore CA5394     
         ))
         .ToArray();
     return forecast;
@@ -35,7 +35,7 @@ app.MapDefaultEndpoints();
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+sealed record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
