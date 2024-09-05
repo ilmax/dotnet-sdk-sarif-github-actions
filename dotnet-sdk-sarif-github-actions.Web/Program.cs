@@ -1,4 +1,4 @@
-using dotnet_sdk_sarif_github_actions.Web;
+using Sarif.Web;
 using dotnet_sdk_sarif_github_actions.Web.Components;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -25,7 +25,7 @@ app.MapGet("/weatherforecast", () =>
 #pragma warning disable CA5394
             Random.Shared.Next(-20, 55),
             summaries[Random.Shared.Next(summaries.Length)]
-#pragma warning restore CA5394     
+#pragma warning restore CA5394
         ))
         .ToArray();
     return forecast;

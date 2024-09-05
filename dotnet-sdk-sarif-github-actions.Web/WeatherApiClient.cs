@@ -1,6 +1,4 @@
-#pragma warning disable CA1707
-namespace dotnet_sdk_sarif_github_actions.Web;
-#pragma warning restore CA1707
+namespace Sarif.Web;
 
 public class WeatherApiClient(HttpClient httpClient)
 {
